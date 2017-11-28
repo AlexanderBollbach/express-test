@@ -2,28 +2,23 @@ var express = require('express');
 var app = express();
 
 
+// app.get('/demos/:name', (req, res) => {
+// 	const { name } = req.params
+// 	res.sendFile(__dirname + `/demos/${name}/`)
+// })
 
+app.use(express.static('./dist'));
 
 var server = app.listen(8080, function () {
    var {host, port} = server.address()
    console.log(`listening at http://${host}:${port}`)
 })
 
+app.get("*",  (req, res) => {
+	res.sendFile(__dirname + "/dist/index.html")
+})
 
 
-app.use(express.static('./dist'));
 
 
 
-
-// app.get("demos", (req,res) => {
-// 	console.log("demos")
-// 	res.sendFile(__dirname + "/dist/index.html")
-// })
-
-// app.get("demos/:name", (req,res) => {
-// 	console.log("demos/:name")
-// 	const { name } = req.params
-// 	res.sendFile(__dirname + `./demos/${name}.html`);
-
-// })
